@@ -1,0 +1,43 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+.lobster{
+    font-family: 'Lobster', cursive;
+    font-size: 2em;
+    
+}
+
+.main{
+    
+    width: 100%;
+    height: 30vh;
+    background-color: rgb(93, 163, 163);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+}
+
+.add{
+ /* position: absolute;
+ top: 40%;
+ left: 45%;
+ overflow: hidden; */
+
+ text-align: center;
+ /* margin: 70px 0; */
+
+}
+.animals{
+    margin: 0;
+    /* background-color: #2b303e; */
+   
+}
+.card{
+    background-color: rgb(93, 163, 163);
+}
+.addModal{
+    text-align: start;
+}
