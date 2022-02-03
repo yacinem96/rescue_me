@@ -55,7 +55,7 @@
     <!-- end nav -->
 
 
-
+<!-- debut formulaire -->
 <main>
     <div class="container p-5 shadow">
         <h1 class="mt-3 h1 text-black-50"><i class="fas fa-edit"></i>Formulaire d'adoption</h1>
@@ -76,13 +76,13 @@
                 </label>
                 <input type="number" class="form-control" min="15" max="99" maxlength="2" id="inputAge" name="inputAge" placeholder="18">
             </div>
-            <div class="col col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <label for="inputTel" class="form-label">
                     <i class="fas fa-phone"></i>
                      Telephone </label>
                 <input type="text" class="form-control" id="inputTel" maxlength="13" name="inputTel" placeholder="+213656731316">
             </div>
-            <div class="col col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12">
                 <label for="inpuPro" class="form-label">
                     <i class="fas fa-briefcase"></i>
                     Profession
@@ -91,10 +91,10 @@
                         aria-placeholder="Choisissez votre profession ">
 
                         <option value="chose" selected disabled>Selectionner votre profession </option>
-                        <option value="homme">Etudiant</option>
-                        <option value="femme">Employer</option>
-                        <option value="femme">Chaumeur</option>
-                        <option value="femme">Autre...</option>
+                        <option value="Etudiant">Etudiant</option>
+                        <option value="Employer">Employer</option>
+                        <option value="Chaumeur">Chaumeur</option>
+                        <option value="Autre">Autre...</option>
 
                     </select>
             </div>
@@ -105,21 +105,52 @@
 
             <div class="col-12">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <input class="form-check-input" type="checkbox" name="check" id="gridCheck">
                     <label class="form-check-label" for="gridCheck">
                         Check me out
                     </label>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary " id="contacter">Contacter</button>
+            <button type="" class="btn btn-primary "  id="contacter">Contacter</button>
 
         </form>
     </div>
 </main>
+<!-- fin formulaire -->
+
+<!-- debut info -->
+<div class="info bg-dark">
+     <h1 class="p-5 h1 text-muted text-center"><i class="fas fa-list-ol"></i> Liste des conatacts</h1>
+    <div class="container shadow p-3 ">
+       
+        <div class="  table table-responsive-lg table-hover p-3 mb-3">
+            <table class="table  mb-0">
+                <thead class="thead">
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Age</th>
+                        <th>Tel</th>
+                        <th>Profession</th>
+                        <th>Desc</th>
+
+
+                    </tr>
+
+                </thead>
+                <tbody id="tableContact">
+      
 
 
 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- fin info -->
 
 
 

@@ -17,6 +17,7 @@ body{
     overflow: hidden;
     display: flex;
     align-items: center;
+    min-height: 250px;
 
 }
 
@@ -30,6 +31,11 @@ body{
  /* margin: 70px 0; */
 
 }
+.titre{
+    text-align: initial;
+    margin-left: 100px;
+    font-size: 1.5em;
+}
 .animals{
     margin: 0;
     /* background-color: #2b303e; */
@@ -37,7 +43,12 @@ body{
 }
 .card{
     background-color: rgb(93, 163, 163);
+    width: 100%;
 }
+/* .row{
+    justify-content: space-between;
+    
+} */
 .addModal{
     text-align: start;
 }
