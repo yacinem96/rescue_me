@@ -41,9 +41,16 @@ body{
     /* background-color: #2b303e; */
    
 }
-.card{
+.card,.info{
     background-color: rgb(93, 163, 163);
     width: 100%;
+}
+
+.info .container{
+    background-color: #212529!important;
+}
+.info{
+    padding-bottom: 70px;
 }
 /* .row{
     justify-content: space-between;

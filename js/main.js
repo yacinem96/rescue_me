@@ -12,8 +12,10 @@ var htmlcontact = "";
 var noms = ["Chat", "Chien berger", "Husky", "Siamois", "Hamster", "Cochon d'inde", "Peroquet", "Peroquet 2", "Peruche"];
 var images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"];
 var descriptions = ["Some quick example text to build on the card title and make up the bulk of the card's content.", "Some quick example text to build on the card title and make up the bulk of the card's content.", "Some quick example text to build on the card title and make up the bulk of the card's content.", "Some quick example text to build on the card title and make up the bulk of the card's content.", "Some quick example text to build on the card title and make up the bulk of the card's content.", "Some quick example text to build on the card title and make up the bulk of the card's content.", "Some quick example text to build on the card title and make up the bulk of the card's content.", "Some quick example text to build on the card title and make up the bulk of the card's content.", "Some quick example text to build on the card title and make up the bulk of the card's content."];
+var cons;
+var tableContact = document.getElementById("tableContact");
 
-
+// begin index page
 if (path === "index.html") {
 
 
@@ -55,8 +57,13 @@ if (path === "index.html") {
     document.getElementById("animals").innerHTML = htmlanimals;
   }
 
+  // onload indew
   onload = () => {
     displayAnimals();
+    cons=localStorage.getItem("contacts");
+    console.log("cons = "+cons);
+
+    tableContact.innerHTML = cons;
   }
 
 
@@ -116,13 +123,21 @@ if (path === "index.html") {
 
 
 }
+// end index page
 
 
-
-
+// Conatct page
 else if (path === "contact.html") {
-  var tableContact = document.getElementById("tableContact");
+  
   var contacter = document.getElementById("contacter");
+   
+  // onload contact
+  onload= ()=>{
+    cons=localStorage.getItem("contacts");
+    console.log("cons = "+cons);
+
+    tableContact.innerHTML = cons;
+  }
 
   contacter.onclick = function (e) {
 
@@ -133,7 +148,7 @@ else if (path === "contact.html") {
     const tel = document.formContact.inputTel.value;
     const profession = document.formContact.profession.value;
     const desc = document.formContact.txtDesc.value;
-    const id = contacts.length;
+    const id = new Date();
     const check = document.getElementById("gridCheck").checked;
     console.log(profession);
     var found=contacts.find(e=> e.tel===tel);
@@ -159,19 +174,35 @@ else if (path === "contact.html") {
 
       };
       contacts.push(contact);
-      htmlcontact += `
-       <tr>
-        <td>${id}</td>
-        <td>${nom}</td>
-        <td>${age}</td>
-        <td>${tel}</td>
-        <td>${profession}</td>
-        <td>${desc}</td>
-       </tr>
-       `;
-      tableContact.innerHTML = htmlcontact;
+      console.log(contacts);
+      
+      htmlcontact="";
+      listeContact(contacts);
 
     }
   }
+  function listeContact(contacts){
+    if (cons) {
+      htmlcontact=cons;
+    }
+     
+    for (let i = 0; i < contacts.length; i++) {
+      htmlcontact += `
+      <tr>
+       <td>${contacts[i].id}</td>
+       <td>${contacts[i].nom}</td>
+       <td>${contacts[i].age}</td>
+       <td>${contacts[i].tel}</td>
+       <td>${contacts[i].profession}</td>
+       <td>${contacts[i].desc}</td>
+      </tr>
+      `;
+      
+      
+    }
 
+    tableContact.innerHTML = htmlcontact;
+    localStorage.setItem("contacts",htmlcontact)
+  }
+  
 } 
