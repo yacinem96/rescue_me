@@ -4,7 +4,8 @@ var index = url.lastIndexOf("/") + 1;
 console.log(index);
 let path = url.substring(index);
 console.log(path);
-
+var favs = [];
+var favoris=[];
 var contacts = [];
 var animals = [];
 var htmlanimals = "";
@@ -18,8 +19,47 @@ var tableContact = document.getElementById("tableContact");
 // begin index page
 if (path === "index.html") {
 
+  var inputSearch = document.getElementById("inputSearch");
+  var btnSearch = document.getElementById("btnSearch");
+  btnSearch.addEventListener("click", search);
+
+  function search(e) {
+    e.preventDefault();
+    var searchVal = inputSearch.value;
+    console.log(searchVal);
+    var found = animals.find(e => e.nom === searchVal);
+    if (found) {
+      const index = found.id;
+      htmlanimals = `
+             <div class="card m-3 shadow" style="width: 18rem;">
+             <img src="images/${found.image}" class="card-img-top mt-2" alt="..." width="100%"
+             height="160px">
+             <div class="card-body">
+               <h5 class="card-title">${found.nom}</h5>
+               <p class="card-text">${found.description}</p> 
+               <a style="width:50%"class="btn btn-dark" onclick="adopter(${found.id})">
+               <i class="fas fa-plus-circle"></i>
+               Adopter
+               </a>
+               <a  style="width:30%"class="btn  btn-danger  float-end" onclick="supp(${found.id})">
+               <i class="fas fa-trash-alt"></i>
+               </a>
+               </div>
+               </div>`;
+      document.getElementById("animals").innerHTML = htmlanimals;
+    } else {
+      alert("Aucun resltat")
+    }
+
+  }
+
+    // favoris = localStorage.getItem("favs").split(",");
+    favs=favoris;
 
   function displayAnimals() {
+    
+    var btnf = document.getElementById("fav");
+    console.log(favoris);
     for (let i = 0; i < noms.length; i++) {
       const nom = noms[i];
       const image = images[i];
@@ -45,23 +85,49 @@ if (path === "index.html") {
                <i class="fas fa-plus-circle"></i>
                Adopter
                </a>
-               <a  style="width:30%"class="btn  btn-danger  float-end" onclick="supp(${i})">
-               <i class="fas fa-trash-alt"></i>
+               <a  style="width:30%"class="btn  btn-outline-danger  float-end" id="fav" onclick="fav(${i})">
+               <i class="fas fa-heart"></i>
                </a>
              </div>
            </div>`;
-
+ console.log("favoris"+favoris);  
+    var existe =favs.find(e=> e===i);
+           if (favs && existe) {
+           btnf.classList.replace("btn-outline-danger","btn-danger")
+           } else {
+          console.log("walou");
+           }
     }
-
 
     document.getElementById("animals").innerHTML = htmlanimals;
   }
 
+  function fav(i) {
+    var existe =favoris.find(e=> 1==1);
+    console.log(existe);
+    favs=favoris;
+    //  var j=existe.index;
+    if (existe) {
+      favs.pop(i);
+    } else {
+      favs.push(i);
+    }
+    
+    
+    localStorage.setItem("favs", favs);
+    console.log("table : " + favs);    
+
+
+  }
+
+
+
+
   // onload indew
   onload = () => {
     displayAnimals();
-    cons=localStorage.getItem("contacts");
-    console.log("cons = "+cons);
+    cons = localStorage.getItem("contacts");
+    console.log("cons = " + cons);
 
     tableContact.innerHTML = cons;
   }
@@ -81,7 +147,7 @@ if (path === "index.html") {
     const check = document.getElementById("gridCheck").checked;
     var path = image.split(`fakepath\\`);
     const img = path[1];
- 
+
 
     console.log(check);
     if (!check) {
@@ -111,15 +177,15 @@ if (path === "index.html") {
       // window.open("index.html");
     }
 
-   
+
 
   }
 
- function supp(i){
-      animals.splice(i, 1);
-      htmlanimals="";
-      displayAnimals();
-      }
+  function supp(i) {
+    animals.splice(i, 1);
+    htmlanimals = "";
+    displayAnimals();
+  }
 
 
 }
@@ -128,13 +194,13 @@ if (path === "index.html") {
 
 // Conatct page
 else if (path === "contact.html") {
-  
+
   var contacter = document.getElementById("contacter");
-   
+
   // onload contact
-  onload= ()=>{
-    cons=localStorage.getItem("contacts");
-    console.log("cons = "+cons);
+  onload = () => {
+    cons = localStorage.getItem("contacts");
+    console.log("cons = " + cons);
 
     tableContact.innerHTML = cons;
   }
@@ -151,12 +217,13 @@ else if (path === "contact.html") {
     const id = new Date();
     const check = document.getElementById("gridCheck").checked;
     console.log(profession);
-    var found=contacts.find(e=> e.tel===tel);
+    var found = contacts.find(e => e.tel === tel);
     console.log(check);
 
-     if (!nom || !age || !desc || !profession || !tel) {
-      alert("Veiller remplir les champs vide");}
-    
+    if (!nom || !age || !desc || !profession || !tel) {
+      alert("Veiller remplir les champs vide");
+    }
+
     else if (!check) {
       alert("Veiller cochz le checkbox");
     }
@@ -175,17 +242,17 @@ else if (path === "contact.html") {
       };
       contacts.push(contact);
       console.log(contacts);
-      
-      htmlcontact="";
+
+      htmlcontact = "";
       listeContact(contacts);
 
     }
   }
-  function listeContact(contacts){
+  function listeContact(contacts) {
     if (cons) {
-      htmlcontact=cons;
+      htmlcontact = cons;
     }
-     
+
     for (let i = 0; i < contacts.length; i++) {
       htmlcontact += `
       <tr>
@@ -197,12 +264,12 @@ else if (path === "contact.html") {
        <td>${contacts[i].desc}</td>
       </tr>
       `;
-      
-      
+
+
     }
 
     tableContact.innerHTML = htmlcontact;
-    localStorage.setItem("contacts",htmlcontact)
+    localStorage.setItem("contacts", htmlcontact)
   }
-  
+
 } 
