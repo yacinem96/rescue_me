@@ -5,7 +5,7 @@ console.log(index);
 let path = url.substring(index);
 console.log(path);
 var favs = [];
-var favoris=[];
+var favoris=[-1];
 var contacts = [];
 var animals = [];
 var htmlanimals = "";
@@ -52,13 +52,17 @@ if (path === "index.html") {
     }
 
   }
+// if (localStorage.getItem("favs")) {
+//   console.log("getitem favs");
+//   favoris = localStorage.getItem("favs").split(",");
+//   favs=favoris;
+// } else {
+  
+// }
+    
 
-    // favoris = localStorage.getItem("favs").split(",");
-    favs=favoris;
 
   function displayAnimals() {
-    
-    var btnf = document.getElementById("fav");
     console.log(favoris);
     for (let i = 0; i < noms.length; i++) {
       const nom = noms[i];
@@ -91,9 +95,13 @@ if (path === "index.html") {
              </div>
            </div>`;
  console.log("favoris"+favoris);  
-    var existe =favs.find(e=> e===i);
-           if (favs && existe) {
-           btnf.classList.replace("btn-outline-danger","btn-danger")
+     var btnf = document.getElementById("fav");
+console.log(btnf);
+    var existe =favoris.find(e=> e==i);
+    console.log("existe " + existe +" i "+i);
+           if ( existe==i) {
+             console.log("bloc if");
+           btnf.classList.replace("btn-outline-danger","btn-danger");
            } else {
           console.log("walou");
            }
@@ -103,14 +111,17 @@ if (path === "index.html") {
   }
 
   function fav(i) {
-    var existe =favoris.find(e=> 1==1);
-    console.log(existe);
     favs=favoris;
+    var existe =favoris.find(e=> e==i);
+    console.log("favoris : "+favoris);
     //  var j=existe.index;
     if (existe) {
       favs.pop(i);
+
+
     } else {
       favs.push(i);
+      // btnf.classList.replace("btn-outline-danger","btn-danger");
     }
     
     
@@ -122,10 +133,19 @@ if (path === "index.html") {
 
 
 
-
-  // onload indew
+  displayAnimals();
+  // onload index
   onload = () => {
-    displayAnimals();
+    // favoris = localStorage.getItem("favs").split(",");
+    // favs=favoris;
+    if (localStorage.getItem("favs")) {
+      console.log("getitem favs");
+      favoris = localStorage.getItem("favs").split(",");
+      favs=favoris;
+    } else {
+      
+    }
+    
     cons = localStorage.getItem("contacts");
     console.log("cons = " + cons);
 
